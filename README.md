@@ -12,13 +12,13 @@ There is no need for any web server, php, mysql, composer, yarn or npm to be ins
 
 git init
 git remote add origin https://github.com/petrzivny/coding-challenge.git
-git pull -u origin master
+git pull origin master
 
 ```
 
 ##### 2. Build docker images and create containers (and networks and volumes) to simulate develop environment:
 ```
-docker-compose build && docker-composer up -d
+docker-compose build && docker-compose up -d
 ```
 It will take about 15 min to build proper php image for a first time. Every other build will be matter of seconds.
 Php dockerfile is intentionally structured and repeats some installations. The reason for this is to easy add or remove libraries and extensions.
