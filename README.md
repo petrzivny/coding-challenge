@@ -29,7 +29,15 @@ docker exec -ituroot carvago_php sh -l
 composer install
 ```
 
-##### 4. Enjoy the app in your browser at either http://192.168.99.100 or localhost
+##### 4. Create database from migration
+```
+docker exec -ituroot carvago_php sh -l      // if you are not loged already
+php bin/console doctrine:migration:diff
+php bin/console doctrine:migration:migrate
+```
+For better experience add some tags in PhpMyAdmin at http://192.168.99.100:8080 (localhost:8080)
+
+##### 5. Enjoy the app in your browser at either http://192.168.99.100 or localhost
 To access admin section, enter /admin with 
 - login: **admin** 
 - password: **admin** 
