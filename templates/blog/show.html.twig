@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'post.detail'|trans|capitalize }}{% endblock %}
+
+{% block body %}
+    <p>{{ 'title'|trans|capitalize }}: {{ post.title|e }}</p>
+    <p>{{ 'text'|trans|capitalize }}: {{ post.text|raw|nl2br }}</p>
+    <p>{{ 'date'|trans|capitalize }}: {{ post.createdAt|localizeddate('medium', 'short', null, app.user.timezone|default(default_timezone)) }}</p>
+    <p>{{ 'tags'|trans|capitalize }}:
+        {% for tag in post.tags %}
+            {{ tag.name }}
+        {% endfor %}
+    </p>
+    {% if is_granted('ROLE_ADMIN') %}
+        <p>{{ 'number.of.visits'|trans|capitalize }}: {{ post.views }}</p>
+        <p>{{ 'status'|trans|capitalize }}: {{ post.enabled ? 'enabled'|trans : 'disabled'|trans }}</p>
+    {% endif %}
+    <a href="javascript:history.back()">{{ 'back'|trans|capitalize }}</a>
+{% endblock %}

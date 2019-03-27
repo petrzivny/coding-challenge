@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'list.of.posts'|trans|capitalize }}{% endblock %}
+
+{% block body %}
+    <a href="{{ path('new_post') }}">New post</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>{{ 'post.title'|trans|capitalize }}</th>
+            <th>{{ 'created'|trans|capitalize }}</th>
+            <th>{{ 'number.of.visits'|trans|capitalize }}</th>
+            <th>{{ 'status'|trans|capitalize }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td><a href="{{ path('admin_post_show', {'id': post.id}) }}">{{ post.title|e }}</a></td>
+                <td>{{ post.createdAt|localizeddate('medium', 'short', null, app.user.timezone|default(default_timezone)) }}</td>
+                <td>{{ post.views }}</td>
+                <td>{{ post.enabled ? 'enabled'|trans|capitalize : 'disabled'|trans|capitalize }}</td>
+                <td><a href="{{ path('edit_post', {'id': post.id}) }}">{{ 'edit'|trans|capitalize }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
